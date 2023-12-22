@@ -7,10 +7,15 @@ child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data)
 {
     if (!terminal) return;
     if (pid == -1) {
-        g_print("Close Now");
+        g_print("Quit App : child-ready did not start properly");
     }
 }
 
+static void
+quit_app(VteTerminal *terminal) {
+    g_print("Quit App");
+
+}
 
 
 static void app_activate(GApplication *app, gpointer *user_data) {
@@ -53,6 +58,10 @@ static void app_activate(GApplication *app, gpointer *user_data) {
         child_ready,  /* callback */
         NULL);        /* user_data */
 
+
+     /* Connect some signals */
+    g_signal_connect(win, "delete-event", G_CALLBACK(quit_app), NULL);
+    g_signal_connect(terminal, "child-exited",G_CALLBACK(quit_app), NULL);
 
     gtk_window_present(GTK_WINDOW(win));
     
