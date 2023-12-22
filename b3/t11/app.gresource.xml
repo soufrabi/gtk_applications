@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/gtk/app/t10">
+    <file>app.txt</file>
+  </gresource>
+</gresources>
