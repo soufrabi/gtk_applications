@@ -16,7 +16,7 @@ child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data)
 static void clicked_torctl_start(GtkButton *btn,VteTerminal *terminal){
     g_print("Clicked Torctl Start\n");
 
-    gchar **command = (gchar *[]){g_strdup("/bin/sh -c \"ls start\""), NULL };
+    gchar **command = (gchar *[]){g_strdup("/bin/sh -c 'ls -la'"), NULL };
     vte_terminal_spawn_async(VTE_TERMINAL(terminal),
         VTE_PTY_DEFAULT,
         NULL,         /* working directory  */
