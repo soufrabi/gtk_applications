@@ -103,15 +103,19 @@ static void app_activate(GApplication *app, gpointer *user_data) {
 
     GtkWidget *win;
     GtkWidget *box;
+    GtkWidget *btn_box;
     GtkWidget *terminal;
     GtkWidget *btn1, *btn2, *btn3;
 
     win = gtk_application_window_new(GTK_APPLICATION(app));
-    gtk_window_set_title(GTK_WINDOW(win), "Application Window Title");
-    gtk_window_set_default_size(GTK_WINDOW(win), 200, 200);
+    gtk_window_set_title(GTK_WINDOW(win), "Torctl GUI Main Window");
+    gtk_window_set_default_size(GTK_WINDOW(win), 400, 500);
+
+    btn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    gtk_box_set_homogeneous(GTK_BOX(btn_box), TRUE);
 
     box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
-    gtk_box_set_homogeneous(GTK_BOX(box), TRUE);
+    gtk_box_set_homogeneous(GTK_BOX(box), FALSE);
     gtk_window_set_child(GTK_WINDOW(win), box);
 
     btn1 = gtk_button_new_with_label("Start");
@@ -126,9 +130,10 @@ static void app_activate(GApplication *app, gpointer *user_data) {
     g_signal_connect(btn3, "clicked", G_CALLBACK(clicked_torctl_status),
                      terminal);
 
-    gtk_box_append(GTK_BOX(box), btn1);
-    gtk_box_append(GTK_BOX(box), btn2);
-    gtk_box_append(GTK_BOX(box), btn3);
+    gtk_box_append(GTK_BOX(btn_box), btn1);
+    gtk_box_append(GTK_BOX(btn_box), btn2);
+    gtk_box_append(GTK_BOX(btn_box), btn3);
+    gtk_box_append(GTK_BOX(box), btn_box);
     gtk_box_append(GTK_BOX(box), terminal);
     /* Configure terminal */
     /* vte_terminal_set_word_chars(VTE_TERMINAL(terminal),"-A-Za-z0-9:./?%&#_=+@~");
